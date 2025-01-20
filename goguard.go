@@ -29,19 +29,19 @@ func Compare(str, hash string) (bool, error) {
 }
 
 type Claims struct {
-	StoreId  string `json:"store_id"`
-	UserId   string `json:"user_id"`
-	UserRole int    `json:"user_role"`
+	Key1   string `json:"key1"`
+	Key2   string `json:"key2"`
+	IntKey int    `json:"int_key"`
 	jwt.RegisteredClaims
 }
 
-func GenerateJWT(storeId, userId, key string, userRole int) (string, error) {
+func GenerateJWT(key1, key2, key string, intKey int) (string, error) {
 	expirationTime := time.Now().Add(24 * time.Hour)
 
 	claims := &Claims{
-		StoreId:  storeId,
-		UserId:   userId,
-		UserRole: userRole,
+		Key1:   key1,
+		Key2:   key2,
+		IntKey: intKey,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(expirationTime),
 		},
